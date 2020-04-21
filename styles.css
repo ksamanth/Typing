@@ -1,0 +1,90 @@
+
+:root {
+    --red    : rgb(255, 60, 0);
+    --green  : rgb(28, 204, 28);
+    --yellow : yellow;
+    --background : rgb(44, 44, 44);
+    --fontsize : 25px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: auto;
+}
+
+
+body {
+    background-color: var(--background);
+}
+
+main {
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) repeat(6, minmax(100px, 300px)) minmax(100px, 1fr);
+    grid-template-rows: repeat(6, minmax(100px, 1fr));
+}
+
+#output-container {
+    align-self: center;
+    text-align: center;
+    grid-column: 3 / 7;
+    grid-row: 2 / 3;
+    border: 3px solid greenyellow;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#input-area {
+    display: flex;
+    align-self: center;
+    grid-column: 3 / 7;
+    grid-row: 3 / 4;
+    border-radius: 3px;
+}
+
+#result {
+    align-self: center;
+    text-align: center;
+    color: tomato;
+    grid-row: 4 / 5;
+    grid-column: 4 / 6;
+}
+
+output {
+    font-size: var(--fontsize);
+    font-family: monospace;
+    color: white;
+}
+
+/*Needs to change*/
+input {
+    height: 45px;
+    width: 900px;
+    font-size: var(--fontsize);
+    background-color: rgb(155, 155, 155);
+}
+
+.redo-button {
+    border-radius: 5px;
+    width: 300px;
+    font-family: monospace;
+    font-size: var(--fontsize);
+    background-color: rgb(80, 80, 80);
+}
+
+.active {
+    color: var(--yellow);
+}
+
+.correct {
+    color: var(--green);
+}
+
+.wrong {
+    color: var(--red);
+}
