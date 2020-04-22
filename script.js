@@ -23,8 +23,6 @@ let wrong = 0
 
 
 function setText() {
-    //set output to invisible
-    resultele.classList.add("ouput-invisible")
     //Empty the output element
     output.innerHTML = ""
     //set random words to output element
@@ -35,7 +33,11 @@ function setText() {
 }
 
 function pageLoad() {
+    //set the cursor to the input field when the page loads / when the user hits the redo button
     input.focus()
+
+    //set output to invisible
+    resultele.classList.add("ouput-invisible")
 }
 
 
@@ -115,7 +117,7 @@ function redo() {
 }
 
 
-//fetches the wordslist from the random.json file / local f
+//fetches the wordslist from the random.json file / local file
 fetch("/random.json")
     .then(data => data.json())
     .then(json => 
