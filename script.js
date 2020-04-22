@@ -1,4 +1,4 @@
-const output = document.querySelector("#word-display")
+const output = document.getElementById("word-display")
 const input = document.querySelector(".wordinput")
 const resultele = document.querySelector(".result")
 
@@ -20,6 +20,8 @@ let invoke = 0
 let result = 0
 let correct = 0
 let wrong = 0
+
+
 function setText() {
     //set output to invisible
     resultele.classList.add("ouput-invisible")
@@ -88,8 +90,7 @@ input.addEventListener("keydown", (e) => {
             result = calculateTypingSpeed(time_count)
             resultele.innerText += " " + result.toFixed(0)
             resultele.classList.add("result")
-            clearInterval(interval)
-            
+            clearInterval(interval)   
         }
 
         input.value = ""
@@ -97,6 +98,7 @@ input.addEventListener("keydown", (e) => {
     }   
 })
 
+//Calculate typings speed
 function calculateTypingSpeed(time_count) {
     return ((60 * correct) / time_count)
 }
@@ -113,7 +115,7 @@ function redo() {
 }
 
 
-//fetches the wordslist from the random.json
+//fetches the wordslist from the random.json file / local f
 fetch("/random.json")
     .then(data => data.json())
     .then(json => 
