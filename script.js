@@ -17,6 +17,7 @@ let wrong = 0
 
 
 function setText() {
+    //set output to invisible
     resultele.classList.add("ouput-invisible")
     //Empty the output element
     output.innerHTML = ""
