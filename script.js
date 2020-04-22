@@ -107,15 +107,20 @@ function calculateTypingSpeed(time_count) {
 
 //Reset the whole output element. *need to check for timer reset and change accordingly.
 function redo() {
+    //re-initialize global variables
     count = 0
     invoke = 0
     time_count = 0
     result = 0 
     
+    //on redo set text afresh again.
     setText()
+    //Set the timer to its initial state.
     clearInterval(interval)
+    //set the cursor.
     pageLoad()
 
+    //set the output element text
     resultele.innerText = "WPM :"
 }
 
