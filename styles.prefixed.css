@@ -31,7 +31,7 @@ main {
     display: grid;
     -ms-grid-columns: minmax(100px, 1fr) repeat(6, minmax(100px, 300px)) minmax(100px, 1fr);
     grid-template-columns: minmax(100px, 1fr) repeat(6, minmax(100px, 300px)) minmax(100px, 1fr);
-    -ms-grid-rows: repeat(6, minmax(100px, 1fr));
+    -ms-grid-rows: repeat(6 , minmax(100px, 1fr));
     grid-template-rows: repeat(6, minmax(100px, 1fr));
 }
 
@@ -285,7 +285,9 @@ main > *:nth-child(48) {
     -ms-grid-row: 2;
     -ms-grid-row-span: 1;
     grid-row: 2 / 3;
-    border: 3px solid greenyellow;
+    border: 5px solid;
+    -webkit-animation: myanimation 15s infinite;
+            animation: myanimation 15s infinite;
     padding: 10px;
     border-radius: 5px;
 }
@@ -354,4 +356,28 @@ input {
 
 .wrong {
     color: var(--red);
+}
+
+@-webkit-keyframes myanimation {
+    0%{border-color: red;}
+    7.5%{border-color: darkred;}
+    15%{border-color: rebeccapurple;}
+    30%{border-color: blue;}
+    45%{border-color: cyan;}
+    60%{border-color: yellow;}
+    75%{border-color: yellowgreen;}
+    90%{border-color: orange;}
+    100%{border-color: red;}
+}
+
+@keyframes myanimation {
+    0%{border-color: red;}
+    7.5%{border-color: darkred;}
+    15%{border-color: rebeccapurple;}
+    30%{border-color: blue;}
+    45%{border-color: cyan;}
+    60%{border-color: yellow;}
+    75%{border-color: yellowgreen;}
+    90%{border-color: orange;}
+    100%{border-color: red;}
 }

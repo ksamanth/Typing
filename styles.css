@@ -34,7 +34,8 @@ main {
     text-align: center;
     grid-column: 3 / 7;
     grid-row: 2 / 3;
-    border: 3px solid greenyellow;
+    border: 5px solid;
+    animation: myanimation 15s infinite;
     padding: 10px;
     border-radius: 5px;
 }
@@ -92,4 +93,16 @@ input {
 
 .wrong {
     color: var(--red);
+}
+
+@keyframes myanimation {
+    0%{border-color: red;}
+    7.5%{border-color: darkred;}
+    15%{border-color: rebeccapurple;}
+    30%{border-color: blue;}
+    45%{border-color: cyan;}
+    60%{border-color: yellow;}
+    75%{border-color: yellowgreen;}
+    90%{border-color: orange;}
+    100%{border-color: red;}
 }
