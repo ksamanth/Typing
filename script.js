@@ -4,18 +4,22 @@ const resultele = document.querySelector(".result")
 
 // Declaring interval globally
 let interval = undefined
+
+//Initialize display variables
 let words = []
 let elements = []
 let sentence = ""
 let number_of_words = 35
+
+//initialize timer variables
 let time_count = 0
 let count = 0
 let invoke = 0
+
+//initialize result variables 
 let result = 0
 let correct = 0
 let wrong = 0
-
-
 function setText() {
     //set output to invisible
     resultele.classList.add("ouput-invisible")
