@@ -1,6 +1,6 @@
 const output = document.querySelector("#word-display")
 const input = document.querySelector(".wordinput")
-const resultele = document.querySelector("#result")
+const resultele = document.querySelector(".result")
 
 // Declaring interval globally
 let interval = undefined
@@ -17,6 +17,7 @@ let wrong = 0
 
 
 function setText() {
+    resultele.classList.add("ouput-invisible")
     //Empty the output element
     output.innerHTML = ""
     //set random words to output element
@@ -24,6 +25,10 @@ function setText() {
         let span = `<span>${words[randomNumber()]}</span>` + " "        //  ele.innerText = word + " "
         output.innerHTML += span                                        //  output.appendChild(ele)
     }   
+}
+
+function pageLoad() {
+    input.focus()
 }
 
 
@@ -73,9 +78,12 @@ input.addEventListener("keydown", (e) => {
         }
 
         if(count === (number_of_words - 1)) {
+            resultele.classList.remove("ouput-invisible")
             result = calculateTypingSpeed(time_count)
-            resultele.innerText = result.toFixed(0)
+            resultele.innerText += " " + result.toFixed(0)
+            resultele.classList.add("result")
             clearInterval(interval)
+            
         }
 
         input.value = ""
@@ -95,6 +103,7 @@ function redo() {
     clearInterval(interval)
     time_count = 0
     result = 0 
+    pageLoad()
 }
 
 

@@ -45,14 +45,19 @@ main {
     grid-column: 3 / 7;
     grid-row: 3 / 4;
     border-radius: 3px;
+    padding: 50px;
 }
 
-#result {
+.result {
     align-self: center;
     text-align: center;
     color: tomato;
     grid-row: 4 / 5;
     grid-column: 4 / 6;
+}
+
+.ouput-invisible {
+    display: none;
 }
 
 output {
