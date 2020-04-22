@@ -78,6 +78,7 @@ input.addEventListener("keydown", (e) => {
             wrong++
         }
 
+        //on the completition of the last word, calculate the wpm.
         if(count === (number_of_words - 1)) {
             resultele.classList.remove("ouput-invisible")
             result = calculateTypingSpeed(time_count)
