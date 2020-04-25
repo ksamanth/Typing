@@ -1,7 +1,5 @@
 # Typing Test Project
 
-[![Build Status](https://travis-ci.com/username/projectname.svg?branch=master)](https://travis-ci.com/username/projectname)
-
 This is my first web-development project using vanilla js and HTML:5. It's nothing fancy.
 
 ### RoadMap
