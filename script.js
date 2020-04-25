@@ -47,7 +47,7 @@ function randomNumber() {
 }
 
 //Used to keep time
-function stopwatch() {
+function startwatch() {
     if(count === 0) {
         interval = setInterval(() => {
             if(time_count < 59) {
@@ -67,7 +67,7 @@ input.addEventListener("keydown", (e) => {
     //starts the stopwatch as soon as the first letter is typed.
     if(count === 0 && invoke === 0) {
         //console.log(words.length)
-        stopwatch()
+        startwatch()
         invoke += 1
     }
     
