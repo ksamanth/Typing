@@ -2,7 +2,10 @@
 :root {
     --red    : rgb(255, 60, 0);
     --green  : rgb(28, 204, 28);
-    --yellow : yellow;
+    --yellow : rgb(255, 251, 0);
+    --orange : rgb(255, 115, 0);
+    --lightorange :  rgb(255, 115, 0, .5);
+    --lighterorange :  rgb(255, 115, 0, .2);
     --background : rgb(44, 44, 44);
     --fontsize : 25px;
 }
@@ -32,9 +35,9 @@ main {
 
 .heading {
     align-self: center;
-    color: white;
+    color: var(--orange);
     margin-top: 10px;
-    font-family: monospace;
+    font-family: Valorant;
     font-size: 35px;
 }
 
@@ -47,6 +50,7 @@ main {
     animation: myanimation 15s infinite;
     padding: 10px;
     border-radius: 10px;
+    background-color: rgb(61, 61, 61);
 }
 
 #input-area {
@@ -60,7 +64,8 @@ main {
 .result {
     align-self: center;
     text-align: center;
-    color: tomato;
+    color: var(--orange);
+    font-family: Valorant;
 }
 
 .ouput-invisible {
@@ -103,13 +108,14 @@ input {
 }
 
 @keyframes myanimation {
-    0%{border-color: red;}
-    7.5%{border-color: darkred;}
-    15%{border-color: rebeccapurple;}
-    30%{border-color: blue;}
-    45%{border-color: cyan;}
-    60%{border-color: yellow;}
-    75%{border-color: yellowgreen;}
-    90%{border-color: orange;}
-    100%{border-color: red;}
+    0%{border-color: var(--red);}
+    25%{border-color:var(--yellow);}
+    50%{border-color: var(--green);}
+    75%{border-color: var(--orange);}
+    100%{border-color: var(--red);}
+}
+
+@font-face {
+    font-family: Valorant;
+    src: url("/Fonts/Valorant.ttf");
 }
