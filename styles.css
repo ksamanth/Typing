@@ -39,6 +39,9 @@ main {
 .heading {
     align-self: center;
     color: white;
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: 35px;
 }
 
 #output-container {
@@ -51,7 +54,7 @@ main {
     border: 5px solid;
     animation: myanimation 15s infinite;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 #input-area {
@@ -87,14 +90,16 @@ input {
     height: 45px;
     font-size: var(--fontsize);
     background-color: rgb(155, 155, 155);
+    border-radius: 10px;
 }
 
 .redo-button {
-    border-radius: 5px;
+    border-radius: 10px;
     width: 300px;
     font-family: monospace;
     font-size: var(--fontsize);
     background-color: rgb(80, 80, 80);
+    margin-left: 10px;
 }
 
 .active {

@@ -9,7 +9,7 @@ let interval = undefined
 let words = []
 let elements = []
 let sentence = ""
-let number_of_words = 35
+let number_of_words = 15
 
 //initialize timer variables
 let time_count = 0
@@ -89,11 +89,15 @@ input.addEventListener("keydown", (e) => {
         //on the completition of the last word, calculate the wpm.
         if(count === (number_of_words - 1)) {
             resultele.classList.remove("ouput-invisible")
-            result = calculateTypingSpeed(time_count)
+            result = calculateTypingSpeed()
             resultele.innerText += " " + result.toFixed(0)
             resultele.classList.add("result")
             clearInterval(interval)   
         }
+
+        // console.log("correct ", correct)
+        // console.log("wrong ", wrong)
+        // console.log("timecount", time_count)
 
         input.value = ""
         count++
@@ -101,7 +105,7 @@ input.addEventListener("keydown", (e) => {
 })
 
 //Calculate typings speed
-function calculateTypingSpeed(time_count) {
+function calculateTypingSpeed() {
     return ((60 * correct) / time_count)
 }
 
@@ -112,6 +116,8 @@ function redo() {
     invoke = 0
     time_count = 0
     result = 0 
+    correct = 0
+    wrong = 0
     
     //on redo set text afresh again.
     setText()
