@@ -1,4 +1,5 @@
 const output = document.getElementById("word-display")
+const outputcontainer = document.querySelector(".output-container")
 const input = document.querySelector(".wordinput")
 const resultele = document.querySelector(".result")
 
@@ -38,6 +39,7 @@ function pageLoad() {
 
     //set output to invisible
     resultele.classList.add("ouput-invisible")
+    outputcontainer.classList.add("correct-text")
 }
 
 
