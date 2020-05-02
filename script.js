@@ -11,9 +11,11 @@ let words = []
 let elements = []
 let sentence = ""
 let number_of_words = 15
+let word = ""
 
 //initialize timer variables
 let time_count = 0
+let letter_count = 0
 let count = 0
 let invoke = 0
 
@@ -39,7 +41,7 @@ function pageLoad() {
 
     //set output to invisible
     resultele.classList.add("ouput-invisible")
-    outputcontainer.classList.add("correct-text")
+    outputcontainer.classList.add("ready-text")
 }
 
 
@@ -65,6 +67,8 @@ function startwatch() {
 
 //Checks for key presses and the correctness of the words typed in the input field. *need split this logic
 input.addEventListener("keydown", (e) => {
+
+    word = output.children[count].innerText
     
     //starts the stopwatch as soon as the first letter is typed.
     if(count === 0 && invoke === 0) {
@@ -72,11 +76,38 @@ input.addEventListener("keydown", (e) => {
         startwatch()
         invoke += 1
     }
+
+    if(!(input.value.trim() === "")) {
+        if (word.substring(0, letter_count) === input.value.trim()) {
+            console.log("true",word.substring(0, letter_count),input.value.trim())
+            if(!(outputcontainer.classList.item(1) === "correct-text")) {
+                outputcontainer.classList.remove(outputcontainer.classList.item(1))
+                outputcontainer.classList.add("correct-text")
+            }
+        } else {
+            console.log("false",word.substring(0, letter_count),input.value)
+            if(!(outputcontainer.classList.item(1) === "wrong-text")) {
+                outputcontainer.classList.remove(outputcontainer.classList.item(1))
+                outputcontainer.classList.add("wrong-text")
+            }
+        }
+    }
+
+    if(e.code === "Backspace") {
+        if(letter_count > 0) {
+            letter_count--
+            console.log(word.substring(0, letter_count),input.value.trim())
+            console.log("letter count ", letter_count)
+        }
+    }else{
+        letter_count++
+        console.log("letter count ", letter_count)
+    }
+
     
     //On space get the complete word and checks if correct or not.
-    if(e.code == "Space") {
+    if(e.code === "Space") {
 
-        let word = output.children[count].innerText
         if(input.value.trim() === word.trim()) 
         {
             output.children[count].classList.add("correct")
@@ -97,11 +128,8 @@ input.addEventListener("keydown", (e) => {
             clearInterval(interval)   
         }
 
-        // console.log("correct ", correct)
-        // console.log("wrong ", wrong)
-        // console.log("timecount", time_count)
-
         input.value = ""
+        letter_count = 0
         count++
     }   
 })
@@ -111,7 +139,7 @@ function calculateTypingSpeed() {
     return ((60 * correct) / time_count)
 }
 
-//Reset the whole output element. *need to check for timer reset and change accordingly.
+//Reset everything to default value.
 function redo() {
     //re-initialize global variables
     count = 0
@@ -120,6 +148,7 @@ function redo() {
     result = 0 
     correct = 0
     wrong = 0
+    input.value = ""
     
     //on redo set text afresh again.
     setText()
