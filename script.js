@@ -77,34 +77,30 @@ input.addEventListener("keydown", (e) => {
         invoke += 1
     }
 
-    if(!(input.value.trim() === "")) {
-        if (word.substring(0, letter_count) === input.value.trim()) {
-            console.log("true",word.substring(0, letter_count),input.value.trim())
-            if(!(outputcontainer.classList.item(1) === "correct-text")) {
-                outputcontainer.classList.remove(outputcontainer.classList.item(1))
-                outputcontainer.classList.add("correct-text")
-            }
-        } else {
-            console.log("false",word.substring(0, letter_count),input.value)
-            if(!(outputcontainer.classList.item(1) === "wrong-text")) {
-                outputcontainer.classList.remove(outputcontainer.classList.item(1))
-                outputcontainer.classList.add("wrong-text")
-            }
+    if (word.substring(0, letter_count) === input.value.trim()) {
+        if(!(outputcontainer.classList.item(1) === "correct-text")) {
+            outputcontainer.classList.remove(outputcontainer.classList.item(1))
+            outputcontainer.classList.add("correct-text")
+        }
+    } else {
+        if(!(outputcontainer.classList.item(1) === "wrong-text")) {
+            outputcontainer.classList.remove(outputcontainer.classList.item(1))
+            outputcontainer.classList.add("wrong-text")
         }
     }
 
     if(e.code === "Backspace") {
         if(letter_count > 0) {
             letter_count--
-            console.log(word.substring(0, letter_count),input.value.trim())
+            console.log(word.substring(0, letter_count+1),input.value.trim())
             console.log("letter count ", letter_count)
         }
     }else{
         letter_count++
+        console.log(word.substring(0, letter_count+1),input.value.trim())
         console.log("letter count ", letter_count)
     }
 
-    
     //On space get the complete word and checks if correct or not.
     if(e.code === "Space") {
 
