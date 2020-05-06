@@ -10,6 +10,7 @@ let interval = undefined
 let words = []
 let elements = []
 let sentence = ""
+let inputfieldvalue = ""
 let number_of_words = 15
 let word = ""
 
@@ -38,6 +39,8 @@ function setText() {
 function pageLoad() {
     //set the cursor to the input field when the page loads / when the user hits the redo button
     input.focus()
+
+    //input.value = ""
 
     //set output to invisible
     resultele.classList.add("ouput-invisible")
@@ -77,39 +80,49 @@ input.addEventListener("keydown", (e) => {
         invoke += 1
     }
 
-    if (word.substring(0, letter_count) === input.value.trim()) {
-        if(!(outputcontainer.classList.item(1) === "correct-text")) {
-            outputcontainer.classList.remove(outputcontainer.classList.item(1))
-            outputcontainer.classList.add("correct-text")
-        }
-    } else {
-        if(!(outputcontainer.classList.item(1) === "wrong-text")) {
-            outputcontainer.classList.remove(outputcontainer.classList.item(1))
-            outputcontainer.classList.add("wrong-text")
-        }
-    }
-
-    if(e.code === "Backspace") {
-        if(letter_count > 0) {
-            letter_count--
-            console.log(word.substring(0, letter_count+1),input.value.trim())
-            console.log("letter count ", letter_count)
-        }
+    
+    /**
+     * We check at each keypress if the right keys are pressed or not. This is used to provide a visual queue to the typist.
+     */
+    if(e.code !== "Backspace" && e.code !== "Space") {
+        inputfieldvalue += e.key
     }else{
-        letter_count++
-        console.log(word.substring(0, letter_count+1),input.value.trim())
-        console.log("letter count ", letter_count)
+        if(inputfieldvalue.length > 0) {
+            inputfieldvalue = inputfieldvalue.slice(0, input.value.length - 1)
+        }
     }
 
-    //On space get the complete word and checks if correct or not.
-    if(e.code === "Space") {
+    if(e.code !== "Space") {
+        check()
+    }
 
-        if(input.value.trim() === word.trim()) 
+    function check() {
+        if (word.slice(0, inputfieldvalue.length) === inputfieldvalue) {
+            console.log(word.slice(0, inputfieldvalue.length),inputfieldvalue)
+            if(!(outputcontainer.classList.item(1) === "correct-text")) {
+                outputcontainer.classList.remove(outputcontainer.classList.item(1))
+                outputcontainer.classList.add("correct-text")
+            }
+        } else {
+            if(!(outputcontainer.classList.item(1) === "wrong-text")) {
+                outputcontainer.classList.remove(outputcontainer.classList.item(1))
+                outputcontainer.classList.add("wrong-text")
+            }
+        }
+    }
+
+    /**
+     * On space get the complete word and checks if correct or not.
+     */
+    if(e.code === "Space") {
+        e.preventDefault()
+
+        if(input.value === word) 
         {
             output.children[count].classList.add("correct")
             correct++
         }
-        else if(input.value.trim() != word)
+        else if(input.value != word)
         {
             output.children[count].classList.add("wrong")
             wrong++
@@ -124,10 +137,10 @@ input.addEventListener("keydown", (e) => {
             clearInterval(interval)   
         }
 
+        inputfieldvalue = ""
         input.value = ""
-        letter_count = 0
         count++
-    }   
+    }
 })
 
 //Calculate typings speed
@@ -144,7 +157,7 @@ function redo() {
     result = 0 
     correct = 0
     wrong = 0
-    input.value = ""
+    input.value = ''
     
     //on redo set text afresh again.
     setText()
