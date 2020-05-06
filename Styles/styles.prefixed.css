@@ -1,4 +1,9 @@
-/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.26, autoprefixer: v9.7.3) */
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
 
 
 :root {
@@ -6,6 +11,7 @@
     --green  : rgb(28, 204, 28);
     --yellow : rgb(255, 251, 0);
     --orange : rgb(255, 115, 0);
+    --redblack : rgba(211, 33, 33, 0.575);
     --lightorange :  rgb(255, 115, 0, .5);
     --lighterorange :  rgb(255, 115, 0, .2);
     --background : rgb(44, 44, 44);
@@ -55,7 +61,7 @@ main {
     font-size: 35px;
 }
 
-#output-container {
+.output-container {
     margin-top: 15rem;
     -ms-flex-item-align: center;
         -ms-grid-row-align: center;
@@ -100,7 +106,6 @@ output {
     color: white;
 }
 
-/*Needs to change*/
 input {
     height: 45px;
     font-size: var(--fontsize);
@@ -127,6 +132,10 @@ input {
 
 .wrong {
     color: var(--red);
+}
+
+.input-color-change {
+    background-color: var(--redblack);
 }
 
 @-webkit-keyframes myanimation {
