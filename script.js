@@ -6,19 +6,19 @@ const resultele = document.querySelector(".result")
 
 let interval = undefined                                                // Declaring interval globally
 
-let words = []                                                          //Initialize display variables
+let words = []                                                          // Initialize display variables
 let elements = []
 let sentence = ""
 let inputfieldvalue = ""
 let number_of_words = 15
 let word = ""
 
-let time_count = 0                                                      //initialize timer variables
+let time_count = 0                                                      // Initialize timer variables
 let letter_count = 0
 let count = 0
 let invoke = 0
 
-let result = 0                                                          //initialize result variables 
+let result = 0                                                          // Initialize result variables 
 let correct = 0
 let wrong = 0
 
@@ -32,8 +32,8 @@ function setText() {
 }
 
 function pageLoad() {
-    input.focus()                                                       //set the cursor to the input field when the page loads / when the user hits the redo button
-    resultele.classList.add("ouput-invisible")                          //set output to invisible
+    input.focus()                                                       // Set the cursor to the input field when the page loads / when the user hits the redo button
+    resultele.classList.add("ouput-invisible")                          // Set output to invisible
 }
 
 
@@ -164,10 +164,10 @@ function redo() {
     input.value = ''
     
     
-    setText()                                                           //on redo set text afresh again.
-    clearInterval(interval)                                             //Set the timer to its initial state.
-    pageLoad()                                                          //set the cursor.
-    resultele.innerText = "WPM :"                                       //Set the result element text
+    setText()                                                           // On redo set text afresh again.
+    clearInterval(interval)                                             // Set the timer to its initial state.
+    pageLoad()                                                          // Set the cursor.
+    resultele.innerText = "WPM :"                                       // Set the result element text
 }
 
 
