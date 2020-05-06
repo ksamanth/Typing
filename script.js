@@ -3,57 +3,50 @@ const outputcontainer = document.querySelector(".output-container")
 const input = document.querySelector(".wordinput")
 const resultele = document.querySelector(".result")
 
-// Declaring interval globally
-let interval = undefined
 
-//Initialize display variables
-let words = []
+let interval = undefined                                                // Declaring interval globally
+
+let words = []                                                          //Initialize display variables
 let elements = []
 let sentence = ""
 let inputfieldvalue = ""
 let number_of_words = 15
 let word = ""
 
-//initialize timer variables
-let time_count = 0
+let time_count = 0                                                      //initialize timer variables
 let letter_count = 0
 let count = 0
 let invoke = 0
 
-//initialize result variables 
-let result = 0
+let result = 0                                                          //initialize result variables 
 let correct = 0
 let wrong = 0
 
 
 function setText() {
-    //Empty the output element
-    output.innerHTML = ""
-    //set random words to output element
-    for(let i = 0 ; i < number_of_words ; i++ ) {                       //  let ele = document.createElement("span")
-        let span = `<span>${words[randomNumber()]}</span>` + " "        //  ele.innerText = word + " "
-        output.innerHTML += span                                        //  output.appendChild(ele)
+    output.innerHTML = ""                                           
+    for(let i = 0 ; i < number_of_words ; i++ ) {                       
+        let span = `<span>${words[randomNumber()]}</span>` + " "        
+        output.innerHTML += span                                        
     }   
 }
 
 function pageLoad() {
-    //set the cursor to the input field when the page loads / when the user hits the redo button
-    input.focus()
-
-    //input.value = ""
-
-    //set output to invisible
-    resultele.classList.add("ouput-invisible")
-    outputcontainer.classList.add("ready-text")
+    input.focus()                                                       //set the cursor to the input field when the page loads / when the user hits the redo button
+    resultele.classList.add("ouput-invisible")                          //set output to invisible
 }
 
 
-//Return a random number in the same range as the length of the wordslist
+/**
+ * Return a random number in the same range as the length of the wordslist.
+ */
 function randomNumber() {
     return (Math.random() * (words.length-1)).toFixed(0)
 }
 
-//Used to keep time
+/**
+ * Stop watch.
+ */
 function startwatch() {
     if(count === 0) {
         interval = setInterval(() => {
@@ -68,21 +61,24 @@ function startwatch() {
     }
 }
 
-//Checks for key presses and the correctness of the words typed in the input field. *need split this logic
+/**
+ * Checks for key presses and the correctness of the words typed in the input field.
+ */
 input.addEventListener("keydown", (e) => {
 
     word = output.children[count].innerText
     
-    //starts the stopwatch as soon as the first letter is typed.
+    /**
+     * Starts the stopwatch as soon as the first letter is typed.
+     */
     if(count === 0 && invoke === 0) {
-        //console.log(words.length)
         startwatch()
         invoke += 1
     }
 
     
     /**
-     * We check at each keypress if the right keys are pressed or not. This is used to provide a visual queue to the typist.
+     * We check at each keypress if the right keys are pressed or not. This is used to provide a visual cue to the typist.
      */
     if(e.code !== "Backspace" && e.code !== "Space") {
         inputfieldvalue += e.key
@@ -96,18 +92,14 @@ input.addEventListener("keydown", (e) => {
         check()
     }
 
+    /**
+     * @change Removed the border visual cue and add the previous border animation to the output container.
+     */
     function check() {
         if (word.slice(0, inputfieldvalue.length) === inputfieldvalue) {
-            console.log(word.slice(0, inputfieldvalue.length),inputfieldvalue)
-            if(!(outputcontainer.classList.item(1) === "correct-text")) {
-                outputcontainer.classList.remove(outputcontainer.classList.item(1))
-                outputcontainer.classList.add("correct-text")
-            }
+            input.classList.remove("input-color-change")
         } else {
-            if(!(outputcontainer.classList.item(1) === "wrong-text")) {
-                outputcontainer.classList.remove(outputcontainer.classList.item(1))
-                outputcontainer.classList.add("wrong-text")
-            }
+            input.classList.add("input-color-change")
         }
     }
 
@@ -116,6 +108,21 @@ input.addEventListener("keydown", (e) => {
      */
     if(e.code === "Space") {
         e.preventDefault()
+
+        if(input.classList.contains("input-color-change")) {
+            input.classList.remove("input-color-change")
+        }
+
+        /**
+         * On the completition of the last word, calculate the wpm.
+         */
+        if(count === (number_of_words - 1)) {
+            resultele.classList.remove("ouput-invisible")
+            result = calculateTypingSpeed()
+            resultele.innerText += " " + result.toFixed(0)
+            resultele.classList.add("result")
+            clearInterval(interval)   
+        }
 
         if(input.value === word) 
         {
@@ -128,29 +135,26 @@ input.addEventListener("keydown", (e) => {
             wrong++
         }
 
-        //on the completition of the last word, calculate the wpm.
-        if(count === (number_of_words - 1)) {
-            resultele.classList.remove("ouput-invisible")
-            result = calculateTypingSpeed()
-            resultele.innerText += " " + result.toFixed(0)
-            resultele.classList.add("result")
-            clearInterval(interval)   
-        }
-
         inputfieldvalue = ""
         input.value = ""
         count++
     }
 })
 
-//Calculate typings speed
+/**
+ * Calculate typings speed. 
+ */
 function calculateTypingSpeed() {
     return ((60 * correct) / time_count)
 }
 
-//Reset everything to default value.
+/**
+ * Reset everything to default value.
+ */
 function redo() {
-    //re-initialize global variables
+    /**
+     * re-initialize global variables
+     */
     count = 0
     invoke = 0
     time_count = 0
@@ -159,19 +163,17 @@ function redo() {
     wrong = 0
     input.value = ''
     
-    //on redo set text afresh again.
-    setText()
-    //Set the timer to its initial state.
-    clearInterval(interval)
-    //set the cursor.
-    pageLoad()
-
-    //set the output element text
-    resultele.innerText = "WPM :"
+    
+    setText()                                                           //on redo set text afresh again.
+    clearInterval(interval)                                             //Set the timer to its initial state.
+    pageLoad()                                                          //set the cursor.
+    resultele.innerText = "WPM :"                                       //Set the result element text
 }
 
 
-//fetches the wordslist from the random.json file / local file
+/**
+ * Fetches the wordslist from the random.json file / local file.
+ */
 fetch("/random.json")
     .then(data => data.json())
     .then(json => 

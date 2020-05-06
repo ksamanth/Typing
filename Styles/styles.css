@@ -4,6 +4,7 @@
     --green  : rgb(28, 204, 28);
     --yellow : rgb(255, 251, 0);
     --orange : rgb(255, 115, 0);
+    --redblack : rgba(211, 33, 33, 0.575);
     --lightorange :  rgb(255, 115, 0, .5);
     --lighterorange :  rgb(255, 115, 0, .2);
     --background : rgb(44, 44, 44);
@@ -47,7 +48,7 @@ main {
     text-align: center;
     width: 700px;
     border: 5px solid;
-    /* animation: myanimation 15s infinite; */
+    animation: myanimation 15s infinite;
     padding: 10px;
     border-radius: 10px;
     background-color: rgb(61, 61, 61);
@@ -78,7 +79,6 @@ output {
     color: white;
 }
 
-/*Needs to change*/
 input {
     height: 45px;
     font-size: var(--fontsize);
@@ -107,7 +107,7 @@ input {
     color: var(--red);
 }
 
-.wrong-text {
+/* .wrong-text {
     border: 3px solid;
     border-color: var(--red);
 }
@@ -120,15 +120,19 @@ input {
 .ready-text {
     border: 3px solid;
     border-color: var(--yellow);
+} */
+
+.input-color-change {
+    background-color: var(--redblack);
 }
 
-/* @keyframes myanimation {
+@keyframes myanimation {
     0%{border-color: var(--red);}
     25%{border-color:var(--yellow);}
     50%{border-color: var(--green);}
     75%{border-color: var(--orange);}
     100%{border-color: var(--red);}
-} */
+}
 
 @font-face {
     font-family: Valorant;
