@@ -6,4 +6,4 @@ This is my first web-development project using vanilla js and HTML:5. It's nothi
 
 ## Bugs
 
-Capitalized letters are shown as error.
+* Capitalized letters are shown as error.
