@@ -1,6 +1,5 @@
 const output = document.getElementById("word-display");
-// Not used
-const outputcontainer = document.querySelector(".output-container");
+const outputcontainer = document.querySelector(".output-container");    // Not used
 const input = document.querySelector(".wordinput");
 const resultElement = document.querySelector(".result");
 
