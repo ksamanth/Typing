@@ -1,7 +1,8 @@
 const output = document.getElementById("word-display")
+// Not used
 const outputcontainer = document.querySelector(".output-container")
 const input = document.querySelector(".wordinput")
-const resultele = document.querySelector(".result")
+const resultElement = document.querySelector(".result")
 
 
 let interval = undefined                                                // Declaring interval globally
@@ -33,7 +34,7 @@ function setText() {
 
 function pageLoad() {
     input.focus()                                                       // Set the cursor to the input field when the page loads / when the user hits the redo button
-    resultele.classList.add("ouput-invisible")                          // Set output to invisible
+    resultElement.classList.add("ouput-invisible")                          // Set output to invisible
 }
 
 
@@ -117,10 +118,10 @@ input.addEventListener("keydown", (e) => {
          * On the completition of the last word, calculate the wpm.
          */
         if(count === (number_of_words - 1)) {
-            resultele.classList.remove("ouput-invisible")
+            resultElement.classList.remove("ouput-invisible")
             result = calculateTypingSpeed()
-            resultele.innerText += " " + result.toFixed(0)
-            resultele.classList.add("result")
+            resultElement.innerText += " " + result.toFixed(0)
+            resultElement.classList.add("result")
             clearInterval(interval)   
         }
 
@@ -167,7 +168,7 @@ function redo() {
     setText()                                                           // On redo set text afresh again.
     clearInterval(interval)                                             // Set the timer to its initial state.
     pageLoad()                                                          // Set the cursor.
-    resultele.innerText = "WPM :"                                       // Set the result element text
+    resultElement.innerText = "WPM :"                                       // Set the result element text
 }
 
 
