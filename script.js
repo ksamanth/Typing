@@ -1,64 +1,61 @@
-const output = document.getElementById("word-display")
+const output = document.getElementById("word-display");
 // Not used
-const outputcontainer = document.querySelector(".output-container")
-const input = document.querySelector(".wordinput")
-const resultElement = document.querySelector(".result")
+const outputcontainer = document.querySelector(".output-container");
+const input = document.querySelector(".wordinput");
+const resultElement = document.querySelector(".result");
 
+let interval = undefined; // Declaring interval globally
 
-let interval = undefined                                                // Declaring interval globally
+let words = []; // Initialize display variables
+let elements = [];
+let sentence = "";
+let inputfieldvalue = "";
+let number_of_words = 15;
+let word = "";
 
-let words = []                                                          // Initialize display variables
-let elements = []
-let sentence = ""
-let inputfieldvalue = ""
-let number_of_words = 15
-let word = ""
+let time_count = 0; // Initialize timer variables
+let letter_count = 0;
+let count = 0;
+let invoke = 0;
 
-let time_count = 0                                                      // Initialize timer variables
-let letter_count = 0
-let count = 0
-let invoke = 0
-
-let result = 0                                                          // Initialize result variables 
-let correct = 0
-let wrong = 0
-
+let result = 0; // Initialize result variables
+let correct = 0;
+let wrong = 0;
 
 function setText() {
-    output.innerHTML = ""                                           
-    for(let i = 0 ; i < number_of_words ; i++ ) {                       
-        let span = `<span>${words[randomNumber()]}</span>` + " "        
-        output.innerHTML += span                                        
-    }   
+    output.innerHTML = "";
+    for (let i = 0; i < number_of_words; i++) {
+        let span = `<span>${words[randomNumber()]}</span>` + " ";
+        output.innerHTML += span;
+    }
 }
 
 function pageLoad() {
-    input.focus()                                                       // Set the cursor to the input field when the page loads / when the user hits the redo button
-    resultElement.classList.add("ouput-invisible")                          // Set output to invisible
+    input.focus(); // Set the cursor to the input field when the page loads / when the user hits the redo button
+    resultElement.classList.add("ouput-invisible"); // Set output to invisible
 }
-
 
 /**
  * Return a random number in the same range as the length of the wordslist.
  */
 function randomNumber() {
-    return (Math.random() * (words.length-1)).toFixed(0)
+    return (Math.random() * (words.length - 1)).toFixed(0);
 }
 
 /**
  * Stop watch.
  */
 function startwatch() {
-    if(count === 0) {
+    if (count === 0) {
         interval = setInterval(() => {
-            if(time_count < 59) {
-                time_count++
+            if (time_count < 59) {
+                time_count++;
                 //console.log(time_count)
-            }else{
+            } else {
                 //console.log("about to stop")
-                clearInterval(interval)
+                clearInterval(interval);
             }
-        }, 1000)
+        }, 1000);
     }
 }
 
@@ -66,31 +63,29 @@ function startwatch() {
  * Checks for key presses and the correctness of the words typed in the input field.
  */
 input.addEventListener("keydown", (e) => {
+    word = output.children[count].innerText;
 
-    word = output.children[count].innerText
-    
     /**
      * Starts the stopwatch as soon as the first letter is typed.
      */
-    if(count === 0 && invoke === 0) {
-        startwatch()
-        invoke += 1
+    if (count === 0 && invoke === 0) {
+        startwatch();
+        invoke += 1;
     }
 
-    
     /**
      * We check at each keypress if the right keys are pressed or not. This is used to provide a visual cue to the typist.
      */
-    if(e.code !== "Backspace" && e.code !== "Space") {
-        inputfieldvalue += e.key
-    }else{
-        if(inputfieldvalue.length > 0) {
-            inputfieldvalue = inputfieldvalue.slice(0, input.value.length - 1)
+    if (e.code !== "Backspace" && e.code !== "Space") {
+        inputfieldvalue += e.key;
+    } else {
+        if (inputfieldvalue.length > 0) {
+            inputfieldvalue = inputfieldvalue.slice(0, input.value.length - 1);
         }
     }
 
-    if(e.code !== "Space") {
-        check()
+    if (e.code !== "Space") {
+        check();
     }
 
     /**
@@ -98,55 +93,52 @@ input.addEventListener("keydown", (e) => {
      */
     function check() {
         if (word.slice(0, inputfieldvalue.length) === inputfieldvalue) {
-            input.classList.remove("input-color-change")
+            input.classList.remove("input-color-change");
         } else {
-            input.classList.add("input-color-change")
+            input.classList.add("input-color-change");
         }
     }
 
     /**
      * On space get the complete word and checks if correct or not.
      */
-    if(e.code === "Space") {
-        e.preventDefault()
+    if (e.code === "Space") {
+        e.preventDefault();
 
-        if(input.classList.contains("input-color-change")) {
-            input.classList.remove("input-color-change")
+        if (input.classList.contains("input-color-change")) {
+            input.classList.remove("input-color-change");
         }
 
         /**
          * On the completition of the last word, calculate the wpm.
          */
-        if(count === (number_of_words - 1)) {
-            resultElement.classList.remove("ouput-invisible")
-            result = calculateTypingSpeed()
-            resultElement.innerText += " " + result.toFixed(0)
-            resultElement.classList.add("result")
-            clearInterval(interval)   
+        if (count === number_of_words - 1) {
+            resultElement.classList.remove("ouput-invisible");
+            result = calculateTypingSpeed();
+            resultElement.innerText += " " + result.toFixed(0);
+            resultElement.classList.add("result");
+            clearInterval(interval);
         }
 
-        if(input.value === word) 
-        {
-            output.children[count].classList.add("correct")
-            correct++
-        }
-        else if(input.value != word)
-        {
-            output.children[count].classList.add("wrong")
-            wrong++
+        if (input.value === word) {
+            output.children[count].classList.add("correct");
+            correct++;
+        } else if (input.value != word) {
+            output.children[count].classList.add("wrong");
+            wrong++;
         }
 
-        inputfieldvalue = ""
-        input.value = ""
-        count++
+        inputfieldvalue = "";
+        input.value = "";
+        count++;
     }
-})
+});
 
 /**
- * Calculate typings speed. 
+ * Calculate typings speed.
  */
 function calculateTypingSpeed() {
-    return ((60 * correct) / time_count)
+    return (60 * correct) / time_count;
 }
 
 /**
@@ -156,29 +148,26 @@ function redo() {
     /**
      * re-initialize global variables
      */
-    count = 0
-    invoke = 0
-    time_count = 0
-    result = 0 
-    correct = 0
-    wrong = 0
-    input.value = ''
-    
-    
-    setText()                                                           // On redo set text afresh again.
-    clearInterval(interval)                                             // Set the timer to its initial state.
-    pageLoad()                                                          // Set the cursor.
-    resultElement.innerText = "WPM :"                                       // Set the result element text
-}
+    count = 0;
+    invoke = 0;
+    time_count = 0;
+    result = 0;
+    correct = 0;
+    wrong = 0;
+    input.value = "";
 
+    setText(); // On redo set text afresh again.
+    clearInterval(interval); // Set the timer to its initial state.
+    pageLoad(); // Set the cursor.
+    resultElement.innerText = "WPM :"; // Set the result element text
+}
 
 /**
  * Fetches the wordslist from the random.json file / local file.
  */
 fetch("/random.json")
-    .then(data => data.json())
-    .then(json => 
-    { 
-        words = json.words
-        setText()
-    })
+    .then((data) => data.json())
+    .then((json) => {
+        words = json.words;
+        setText();
+    });
