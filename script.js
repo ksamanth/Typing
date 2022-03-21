@@ -74,7 +74,12 @@ input.addEventListener("keydown", (e) => {
         }
     }
 
-    if (e.code !== "Space" && e.code != "Tab" && e.code != "Shift") {
+    if (e.code !== "Space" && 
+        e.code != "Tab" && 
+        e.code != "Shift" &&
+        e.code != "Ctrl" &&
+        e.code != "Esc" &&
+        e.code != "Alt") {
         check();
     }
 
