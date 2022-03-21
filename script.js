@@ -70,7 +70,7 @@ input.addEventListener("keydown", (e) => {
         }
     
         // We check at each keypress if the right keys are pressed or not. This is used to provide a visual cue to the typist.
-        if (e.code !== "Backspace" && e.code !== "Space" && e.key != "Shift" && e.key != "Tab" && e.key != "Enter") {
+        if (e.code !== "Backspace" && e.code !== "Space" && e.key != "Shift" && e.key != "Enter") {
             inputfieldvalue += e.key;
         } else {
             if (inputfieldvalue.length > 0) {
@@ -78,8 +78,7 @@ input.addEventListener("keydown", (e) => {
             }
         }
     
-        if (e.key !== " " && 
-            e.key != "Tab" && 
+        if (e.key !== " " &&
             e.key != "Shift" &&
             e.key != "Control" &&
             e.key != "Escape" &&
