@@ -13,7 +13,7 @@ let word = "";
 let time_count = 0;                                     // Initialize timer variables
 let letter_count = 0;
 let count = 0;
-let invoke = 0;
+let invoked = false;
 let result = 0;                                         // Initialize result variables
 let correct = 0;
 let wrong = 0;
@@ -57,68 +57,78 @@ function startwatch() {
  * Checks for key presses and the correctness of the words typed in the input field.
  */
 input.addEventListener("keydown", (e) => {
-    word = output.children[count].innerText;
-
-    // Starts the stopwatch as soon as the first letter is typed.
-    if (count === 0 && invoke === 0) {
-        startwatch();
-        invoke += 1;
-    }
-
-    // We check at each keypress if the right keys are pressed or not. This is used to provide a visual cue to the typist.
-    if (e.code !== "Backspace" && e.code !== "Space") {
-        inputfieldvalue += e.key;
-    } else {
-        if (inputfieldvalue.length > 0) {
-            inputfieldvalue = inputfieldvalue.slice(0, input.value.length - 1);
+    if(e.key === "Tab") {
+        e.preventDefault()
+        redo()
+    }else {
+        word = output.children[count].innerText;
+    
+        // Starts the stopwatch as soon as the first letter is typed.
+        if (count === 0 && invoked === false) {
+            startwatch();
+            invoked = true;
         }
-    }
-
-    if (e.code !== "Space") {
-        check();
-    }
-
-    /**
-     * @change Removed the border visual cue and add the previous border animation to the output container.
-     */
-    function check() {
-        if (word.slice(0, inputfieldvalue.length) === inputfieldvalue) {
-            input.classList.remove("input-color-change");
+    
+        // We check at each keypress if the right keys are pressed or not. This is used to provide a visual cue to the typist.
+        if (e.code !== "Backspace" && e.code !== "Space" && e.key != "Shift" && e.key != "Tab" && e.key != "Enter") {
+            inputfieldvalue += e.key;
         } else {
-            input.classList.add("input-color-change");
+            if (inputfieldvalue.length > 0) {
+                inputfieldvalue = inputfieldvalue.slice(0, input.value.length - 1);
+            }
         }
-    }
-
-    /**
-     * On space get the complete word and checks if correct or not.
-     */
-    if (e.code === "Space") {
-        e.preventDefault();
-
-        if (input.classList.contains("input-color-change")) {
-            input.classList.remove("input-color-change");
+    
+        if (e.key !== " " && 
+            e.key != "Tab" && 
+            e.key != "Shift" &&
+            e.key != "Control" &&
+            e.key != "Escape" &&
+            e.key != "Alt") {
+            check();
         }
-
-        // On the completition of the last word, calculate the wpm.
-        if (count === number_of_words - 1) {
-            resultElement.classList.remove("ouput-invisible");
-            result = calculateTypingSpeed();
-            resultElement.innerText += " " + result.toFixed(0);
-            resultElement.classList.add("result");
-            clearInterval(interval);
+    
+        /**
+         * @change Removed the border visual cue and add the previous border animation to the output container.
+         */
+        function check() {
+            if (word.slice(0, inputfieldvalue.length) === inputfieldvalue) {
+                input.classList.remove("input-color-change");
+            } else {
+                input.classList.add("input-color-change");
+            }
         }
-
-        if (input.value === word) {
-            output.children[count].classList.add("correct");
-            correct++;
-        } else if (input.value != word) {
-            output.children[count].classList.add("wrong");
-            wrong++;
+    
+        /**
+         * On space get the complete word and checks if correct or not.
+         */
+        if (e.code === "Space") {
+            e.preventDefault();
+    
+            if (input.classList.contains("input-color-change")) {
+                input.classList.remove("input-color-change");
+            }
+    
+            // On the completition of the last word, calculate the wpm.
+            if (count === number_of_words - 1) {
+                resultElement.classList.remove("ouput-invisible");
+                result = calculateTypingSpeed();
+                resultElement.innerText += " " + result.toFixed(0);
+                resultElement.classList.add("result");
+                clearInterval(interval);
+            }
+    
+            if (input.value === word) {
+                output.children[count].classList.add("correct");
+                correct++;
+            } else if (input.value != word) {
+                output.children[count].classList.add("wrong");
+                wrong++;
+            }
+    
+            inputfieldvalue = "";
+            input.value = "";
+            count++;
         }
-
-        inputfieldvalue = "";
-        input.value = "";
-        count++;
     }
 });
 
@@ -135,12 +145,14 @@ function calculateTypingSpeed() {
 function redo() {
     // Re-initialize global variables
     count = 0;
-    invoke = 0;
+    invoked = false;
     time_count = 0;
     result = 0;
     correct = 0;
     wrong = 0;
     input.value = "";
+    inputfieldvalue = "";
+    input.classList.remove("input-color-change");
 
     setText();                          // On redo set text afresh again.
     clearInterval(interval);            // Set the timer to its initial state.
