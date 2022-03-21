@@ -13,7 +13,7 @@ let word = "";
 let time_count = 0;                                     // Initialize timer variables
 let letter_count = 0;
 let count = 0;
-let invoke = 0;
+let invoked = false;
 let result = 0;                                         // Initialize result variables
 let correct = 0;
 let wrong = 0;
@@ -60,9 +60,9 @@ input.addEventListener("keydown", (e) => {
     word = output.children[count].innerText;
 
     // Starts the stopwatch as soon as the first letter is typed.
-    if (count === 0 && invoke === 0) {
+    if (count === 0 && invoked === false) {
         startwatch();
-        invoke += 1;
+        invoked = true;
     }
 
     // We check at each keypress if the right keys are pressed or not. This is used to provide a visual cue to the typist.
@@ -135,7 +135,7 @@ function calculateTypingSpeed() {
 function redo() {
     // Re-initialize global variables
     count = 0;
-    invoke = 0;
+    invoked = false;
     time_count = 0;
     result = 0;
     correct = 0;
