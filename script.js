@@ -141,6 +141,7 @@ function redo() {
     correct = 0;
     wrong = 0;
     input.value = "";
+    input.classList.remove("input-color-change");
 
     setText();                          // On redo set text afresh again.
     clearInterval(interval);            // Set the timer to its initial state.
