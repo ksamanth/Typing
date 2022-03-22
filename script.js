@@ -168,3 +168,7 @@ fetch("/random.json")
         words = json.words;
         setText();
     });
+
+function openSettings() {
+    window.location.href = 'settings.html';
+}
