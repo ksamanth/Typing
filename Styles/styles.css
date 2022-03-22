@@ -34,6 +34,10 @@ main {
     justify-content: space-between;
 }
 
+input:focus {
+    outline: none;
+}
+
 .heading {
     align-self: center;
     color: var(--orange);
