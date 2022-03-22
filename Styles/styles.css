@@ -84,7 +84,7 @@ input:focus {
 
 output {
     font-size: var(--fontsize);
-    font-family: monospace;
+    font-family: Roboto Mono;
     color: white;
 }
 
